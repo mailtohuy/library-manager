@@ -29,6 +29,8 @@ inquirer.prompt([
   },
 ]).then(session => {
   console.log(session);
+  let libman = init(session.path);
+  console.log(libman.search(session.terms));
 });
 
 
@@ -88,6 +90,9 @@ function init(inventory_file) {
     return searchPhrase.split(' ').reduce( (list, searchTerm) => list.filter (obj => isMatchedAnyValue(obj, searchTerm)) , objectList );
   }
 
+  return {
+    search: terms=>search(terms,checkedOutList)
+  }; 
 
 }
 
